@@ -32,6 +32,7 @@ pipeline {
             steps {
                 // Install Python dependencies'
                 sh 'python3 -m venv ${VENV_DIR}'
+                sh 'chmod +x ${VENV_DIR}/bin/activate'
                 sh '${VENV_DIR}/bin/activate'
                 sh 'pip install --upgrade pip'
                 sh 'pip install -r requirements.txt'
