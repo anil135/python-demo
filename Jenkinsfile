@@ -48,7 +48,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Run Docker Image') {
             steps {
                 // Build the Docker image for the microservice
                 sh "docker compose up"
