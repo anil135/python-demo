@@ -6,7 +6,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'docker-repo-credentials' // Docker credentials stored in Jenkins
         DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/test'
         DB_CONTAINER_NAME = 'jenkins_db'
-        VENV_DIR = 'venv'
+        VENV_DIR = './venv'
     }
 
     stages {
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 // Install Python dependencies'
                 sh 'python3 -m venv ${VENV_DIR}'
-                sh '. /${VENV_DIR}/bin/activate'
+                sh '${VENV_DIR}/bin/activate'
                 sh 'pip install --upgrade pip'
                 sh 'pip install -r requirements.txt'
             }
