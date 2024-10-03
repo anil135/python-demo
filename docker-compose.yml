@@ -3,6 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
+    image: anil135/demo:latest
     ports:
       - "5000:5000"
     environment:
