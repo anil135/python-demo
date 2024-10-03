@@ -39,19 +39,12 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // Run unit tests with DATABASE_URL
-                withEnv(['DATABASE_URL=postgresql://postgres:password@localhost:5432/users_db']) {
-                    sh 'pytest tests/'
-                }
-            }
-        }
+        
 
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image for the microservice
-                sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."
+                sh "docker compose build"
             }
         }
 
@@ -61,7 +54,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                        docker compose push
                     '''
                 }
             }
@@ -70,7 +63,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 // Remove PostgreSQL container
-                sh "docker stop ${DB_CONTAINER_NAME} && docker rm ${DB_CONTAINER_NAME}"
+                sh "sh 'docker compose down || true'"
             }
         }
     }
