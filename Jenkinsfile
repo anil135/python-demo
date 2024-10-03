@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'yourdockeruser/sample-python-microservice'
+        DOCKER_IMAGE = 'anil135/sample-python-microservice'
         DOCKER_CREDENTIALS_ID = 'docker-repo-credentials' // Docker credentials stored in Jenkins
-        DATABASE_URL = 'postgresql://postgres:password@localhost:5432/users_db'
+        DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/test'
         DB_CONTAINER_NAME = 'jenkins_db'
     }
 
@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the repository
-                git branch: 'main', url: 'https://github.com/yourrepo/sample-python-microservice.git'
+                git branch: 'main', url: 'https://github.com/anil135/python-demo.git'
             }
         }
 
