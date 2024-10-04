@@ -1,5 +1,5 @@
-Flask==2.1.1
-Flask-SQLAlchemy==2.5.1
+Flask
+Flask-SQLAlchemy
 Werkzeug
-psycopg2-binary==2.9.3
+psycopg2-binary
 pytest
